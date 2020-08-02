@@ -1,0 +1,16 @@
+{
+  "categorias": [
+    {
+      "id": 1,
+      "nome": "Front-end",
+      "descricao": "Esta fera ai bicho",
+      "cor": "#cbd1ff"
+    },
+    {
+      "id": 2,
+      "nome": "Back end",
+      "descricao": "Esta fera ai meu",
+      "cor": "#cbd1ff"
+    }
+  ]
+}

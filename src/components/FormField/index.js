@@ -3,7 +3,7 @@
 /* eslint-disable quotes */
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const FormFieldWrapper = styled.div`
   position: relative;
@@ -16,7 +16,7 @@ const FormFieldWrapper = styled.div`
 `;
 
 const Label = styled.label``;
-Label.text = styled.span`
+Label.Text = styled.span`
   color: #e5e5e5;
   height: 57px;
   position: absolute;
@@ -57,24 +57,39 @@ const Input = styled.input`
   &:focus {
     border-bottom-color: var(--primary);
   }
+  &:focus:not([type="color"]) + span {
+    transform: scale(0.6) translateY(-10px);
+  }
+  ${function ({ hasValue }) {
+    return (
+      hasValue &&
+      css`
+        &:not([type="color"]) + span {
+          transform: scale(0.6) translateY(-10px);
+        }
+      `
+    );
+  }}
 `;
 
 function FormField({ type, name, label, value, onChange }) {
   const fieldId = `id_${name}`;
   const isTypeTextArea = type === "textarea";
   const tag = isTypeTextArea ? "textarea" : "input";
+  const hasValue = value.length;
   return (
     <FormFieldWrapper>
       <Label htmlFor={fieldId}>
-        {label}
         <Input
           as={tag}
           id={fieldId}
           type={type}
           value={value}
           name={name}
+          hasValue={hasValue}
           onChange={onChange}
         />
+        <Label.Text>{label}</Label.Text>
       </Label>
     </FormFieldWrapper>
   );

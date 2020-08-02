@@ -1,7 +1,8 @@
+/* eslint-disable dot-location */
 /* eslint-disable linebreak-style */
 /* eslint-disable quotes */
 /* eslint-disable linebreak-style */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageDefault from "../../../components/PageDefault";
 import FormField from "../../../components/FormField";
@@ -25,6 +26,14 @@ function CadastroCategoria() {
   function handleClick(info) {
     setValue(info.target.getAttribute("name"), info.target.value);
   }
+
+  useEffect(() => {
+    const URL = "http://localhost:8080/categorias";
+    fetch(URL).then(async (r) => {
+      const resp = await r.json();
+      setCategorias([...resp]);
+    });
+  }, []);
 
   return (
     <PageDefault>
@@ -65,6 +74,7 @@ function CadastroCategoria() {
         />
         <Button>Cadastrar</Button>
       </form>
+      {categorias.length === 0 && <div>Loading</div>}
       <ul>
         {categorias.map((item, index) => (
           // eslint-disable-next-line react/no-array-index-key
