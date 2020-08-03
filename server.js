@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable quotes */
 /* eslint-disable no-console */
 const jsonServer = require("json-server");
